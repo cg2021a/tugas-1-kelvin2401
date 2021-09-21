@@ -1,10 +1,10 @@
 Nama benda: Apel
 Foto:
 Depan Atas
-https://cdn.discordapp.com/attachments/617399865013567490/889842979316056095/IMG_20210921_185357.jpg
+![Depan Atas](https://user-images.githubusercontent.com/7587945/134167426-ec90ed74-5df8-4208-9c1c-b278dbc5d943.jpg)
 Kanan Atas
-https://cdn.discordapp.com/attachments/617399865013567490/889842934474756096/IMG_20210921_185423.jpg
+![Kanan Atas](https://user-images.githubusercontent.com/7587945/134167463-4fe1e7bc-2da0-42dd-b2c7-0d1efc60ab2e.jpg)
 Belakang Atas
-https://cdn.discordapp.com/attachments/617399865013567490/889842894800846908/IMG_20210921_185508.jpg
+![Belakang Atas](https://user-images.githubusercontent.com/7587945/134167472-f126d827-fd5c-4001-96d2-52b03487dfa6.jpg)
 Kiri Atas
-https://cdn.discordapp.com/attachments/617399865013567490/889842851368808478/IMG_20210921_185521.jpg
+![Kiri Atas](https://user-images.githubusercontent.com/7587945/134167484-320595cf-b2ab-42de-97a2-bbb878cc6b95.jpg)
