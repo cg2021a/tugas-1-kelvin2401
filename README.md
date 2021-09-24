@@ -1,10 +1,10 @@
-Nama benda: Apel  
+Nama benda: Kalkulator  
 Foto:  
 Depan Atas  
-![Depan Atas](https://user-images.githubusercontent.com/7587945/134167426-ec90ed74-5df8-4208-9c1c-b278dbc5d943.jpg)
+![IMG_20210924_205111](https://user-images.githubusercontent.com/7587945/134702615-02030593-cf76-48ae-b65c-5f4494e2e828.jpg)
 Kanan Atas  
-![Kanan Atas](https://user-images.githubusercontent.com/7587945/134167463-4fe1e7bc-2da0-42dd-b2c7-0d1efc60ab2e.jpg)
+![IMG_20210924_205122](https://user-images.githubusercontent.com/7587945/134702644-d83299bc-5550-4434-9fff-cf208a95ab6c.jpg)
 Belakang Atas  
-![Belakang Atas](https://user-images.githubusercontent.com/7587945/134167472-f126d827-fd5c-4001-96d2-52b03487dfa6.jpg)
+![IMG_20210924_205133](https://user-images.githubusercontent.com/7587945/134702668-5d7d866a-56bf-4cb2-9610-283696000d9a.jpg)
 Kiri Atas  
-![Kiri Atas](https://user-images.githubusercontent.com/7587945/134167484-320595cf-b2ab-42de-97a2-bbb878cc6b95.jpg)
+![IMG_20210924_205147](https://user-images.githubusercontent.com/7587945/134702692-6be06b0d-8382-4a50-a6c2-108536217f8c.jpg)
