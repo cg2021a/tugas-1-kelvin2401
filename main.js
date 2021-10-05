@@ -512,6 +512,12 @@ function main(){
     // Use the combined shader program object
     gl.useProgram(shaderProgram);
 
+    // Create an empty buffer object and store vertex data
+    var vertex_buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
     // Create an empty buffer object and store Index data
     var Index_Buffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
@@ -547,6 +553,12 @@ function main(){
     // enable the color attribute
     gl.enableVertexAttribArray(color);
 
+    // Bind vertex buffer object
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+
+    // point an attribute to the currently bound VBO
+    gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
+
     // set animation speed
     var speed = 0.0080;
     var Ty_old = 0;
@@ -554,21 +566,13 @@ function main(){
     var animate = function(time) {
 
       // Create an empty buffer object and store vertex data
-      var vertex_buffer = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-      gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
       /* ======== Associating shaders to buffer objects =======*/
 
       var translation = gl.getUniformLocation(shaderProgram, 'translation');
       gl.uniform4f(translation, 0.0, 0.0, 0.0, 0.0);
-
-      // Bind vertex buffer object
-      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-
-      // point an attribute to the currently bound VBO
-      gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
 
       /*============Drawing the Object====================*/
 
@@ -587,32 +591,19 @@ function main(){
       //Draw the triangle
       gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
 
-      // Create an empty buffer object and store vertex data
-      var vertex_buffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices2), gl.STATIC_DRAW);
-      gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
       var Ty = Ty_old + speed;
       var translation = gl.getUniformLocation(shaderProgram, 'translation');
       gl.uniform4f(translation, 0.0, Ty, 0.0, 0.0);
 
-      // Bind vertex buffer object
-      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-
-      // point an attribute to the currently bound VBO
-      gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
-
       //Draw the triangle
       gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
 
       //Set animation boundaries
-      if(Ty>0.5){
-         speed *= -1;
-      }
-      else if(Ty<-0.65){
-         speed *= -1;
-      }
+      if(Ty>0.5) speed *= -1;
+      else if(Ty<-0.65) speed *= -1;
+      
       Ty_old = Ty;
 
       window.requestAnimationFrame(animate);
