@@ -570,7 +570,7 @@ function main(){
       // point an attribute to the currently bound VBO
       gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
 
-      /*============Drawing the Quad====================*/
+      /*============Drawing the Object====================*/
 
       // Clear the canvas
       gl.clearColor(0.8, 0.8, 0.8, 0.9);
