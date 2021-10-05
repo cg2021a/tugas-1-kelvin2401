@@ -166,7 +166,7 @@ function main(){
         0.0,0.0,0.0, 0.0,0.0,0.0, 0.0,0.0,0.0, 0.0,0.0,0.0,
        ];
     
-    indices = [
+    var indices = [
         3,2,1,3,1,0,
         7,6,5,7,5,4,
         11,10,9,11,9,8,
@@ -195,31 +195,17 @@ function main(){
         103,102,101,103,101,100,
        ];
     
-    // Create an empty buffer object and store vertex data
-    var vertex_buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
-
-    // Create an empty buffer object and store Index data
-    var Index_Buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
-
-    // Create an empty buffer object and store color data
-    var color_buffer = gl.createBuffer ();
-    gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+    
 
     /*======================= Shaders =======================*/
     
     // vertex shader source code
     var vertCode = 'attribute vec3 coordinates;'+
+       'uniform vec4 translation;' +
        'attribute vec3 color;'+
        'varying vec3 vColor;'+
        'void main(void) {' +   
-          ' gl_Position = vec4(coordinates, 1.0);' +
+          ' gl_Position = translation + vec4(coordinates, 1.0);' +
           'vColor = color;'+
        '}';
        
@@ -265,51 +251,9 @@ function main(){
     // Use the combined shader program object
     gl.useProgram(shaderProgram);
 
-    /* ======== Associating shaders to buffer objects =======*/
-
-    // Bind vertex buffer object
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-
-    // Bind index buffer object
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
-
-    // Get the attribute location
-    var coord = gl.getAttribLocation(shaderProgram, "coordinates");
-
-    // point an attribute to the currently bound VBO
-    gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
-
-    // Enable the attribute
-    gl.enableVertexAttribArray(coord);
-
-    // bind the color buffer
-    gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
     
-    // get the attribute location
-    var color = gl.getAttribLocation(shaderProgram, "color");
 
-    // point attribute to the volor buffer object
-    gl.vertexAttribPointer(color, 3, gl.FLOAT, false,0,0) ;
-
-    // enable the color attribute
-    gl.enableVertexAttribArray(color);
-
-    /*============Drawing the Quad====================*/
-
-    // Clear the canvas
-    gl.clearColor(0.8, 0.8, 0.8, 0.9);
-
-    // Enable the depth test
-    gl.enable(gl.DEPTH_TEST);
-
-    // Clear the color buffer bit
-    gl.clear(gl.COLOR_BUFFER_BIT);
-
-    // Set the view port
-    gl.viewport(0,0,canvas.width,canvas.height);
-
-    //Draw the triangle
-    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
+    
 
     //Object 2
     var vertices2 = [
@@ -502,6 +446,80 @@ function main(){
        103,102,101,103,101,100,
     ];
 
+    
+
+    
+    var speed = 0.0080;
+    var Ty_old = 0;
+    
+    var animate = function(time) {
+       // Create an empty buffer object and store vertex data
+      var vertex_buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+      // Create an empty buffer object and store Index data
+      var Index_Buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+
+      // Create an empty buffer object and store color data
+      var color_buffer = gl.createBuffer ();
+      gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+
+      /* ======== Associating shaders to buffer objects =======*/
+
+    var Tx = 0.0, Ty = 0.0, Tz = 0.0;
+    var translation = gl.getUniformLocation(shaderProgram, 'translation');
+    gl.uniform4f(translation, Tx, Ty, Tz, 0.0);
+
+   // Bind vertex buffer object
+   gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+
+   // Bind index buffer object
+   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
+
+   // Get the attribute location
+   var coord = gl.getAttribLocation(shaderProgram, "coordinates");
+
+   // point an attribute to the currently bound VBO
+   gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
+
+   // Enable the attribute
+   gl.enableVertexAttribArray(coord);
+
+   // bind the color buffer
+   gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
+
+   // get the attribute location
+   var color = gl.getAttribLocation(shaderProgram, "color");
+
+   // point attribute to the volor buffer object
+   gl.vertexAttribPointer(color, 3, gl.FLOAT, false,0,0) ;
+
+   // enable the color attribute
+   gl.enableVertexAttribArray(color);
+
+   /*============Drawing the Quad====================*/
+
+    // Clear the canvas
+    gl.clearColor(0.8, 0.8, 0.8, 0.9);
+
+    // Enable the depth test
+    gl.enable(gl.DEPTH_TEST);
+
+    // Clear the color buffer bit
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    // Set the view port
+    gl.viewport(0,0,canvas.width,canvas.height);
+
+    //Draw the triangle
+    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
+
     // Create an empty buffer object and store vertex data
     var vertex_buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
@@ -518,6 +536,10 @@ function main(){
     var color_buffer = gl.createBuffer ();
     gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors2), gl.STATIC_DRAW);
+
+    var Tx = 0.0, Ty = Ty_old + speed, Tz = 0.0;
+         var translation = gl.getUniformLocation(shaderProgram, 'translation');
+         gl.uniform4f(translation, Tx, Ty, Tz, 0.0);
 
     // Bind vertex buffer object
     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
@@ -548,4 +570,14 @@ function main(){
 
     //Draw the triangle
     gl.drawElements(gl.TRIANGLES, indices2.length, gl.UNSIGNED_SHORT,0);
+    if(Ty>0.5){
+       speed *= -1;
+    }
+    else if(Ty<-0.65){
+       speed *= -1;
+    }
+    Ty_old = Ty;
+    window.requestAnimationFrame(animate);
+   }
+   animate(0)
 }
