@@ -50,6 +50,14 @@
                 cube = new THREE.Mesh(geometry, material);
                 scene.add(cube);
         }
+        let createDirectionalCube = function() {
+                const light = new THREE.DirectionalLight(0xf6e86d, 1);
+                scene.add(light);
+                let geometry = new THREE.BoxGeometry(1, 1, 1);
+                let material = new THREE.MeshLambertMaterial({color: 0x0095DD});
+                cube = new THREE.Mesh(geometry, material);
+                scene.add(cube);
+        }
         // set up the environment - 
         // initiallize scene, camera, objects and renderer
         let init = function() {
@@ -64,11 +72,11 @@
 
             // 3. create an locate the object on the scene           
             //createCube();
-            createSphere();
+            //createSphere();
             //createTetrahedron();
             //createAmbientCube();
             //createHemisphereCube();
-
+            createDirectionalCube();
             // 4. create the renderer     
             renderer = new THREE.WebGLRenderer();   
             renderer.setSize(window.innerWidth, window.innerHeight);
@@ -80,8 +88,8 @@
         
         // main animation loop - calls 50-60 in a second.
         let mainLoop = function() {
-            //cube.rotation.x+=0.01;
-            sphere.rotation.x+=0.01;
+            cube.rotation.x+=0.01;
+            //sphere.rotation.x+=0.01;
             //tetrahedron.rotation.x+=0.01;
             console.log("Hello");
             renderer.render(scene, camera);
